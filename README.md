@@ -1,4 +1,4 @@
-#de_bate
+# de_bate
 
 de_bate is a rails application that parses text from various sources and creates debate evidence using machine learning.
 
