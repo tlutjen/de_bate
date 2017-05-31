@@ -8,14 +8,6 @@ de_bate is a rails application that parses text from various sources and creates
 
 ## Getting Started
 
-```bash
-# update your system
-$ sudo apt-get update && sudo apt-get upgrade
-# install ruby and ruby headers
-$ sudo apt-get install ruby ruby-dev
-#
-```
-
 ### Installing dependencies
 
 Instructions assume you are running Ubuntu 16.04 LTS and have git installed.
