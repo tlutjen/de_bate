@@ -5,12 +5,16 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/site/.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
+/site/db/*.sqlite3
+/site/db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+/site/log/*.log
+/site/tmp
+
+#ignore vagrant and chef files
+.vagrant
+ubuntu-xenial-16.04-cloudimg-console.log

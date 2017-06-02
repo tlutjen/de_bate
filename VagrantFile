@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+REQUIRED_PLUGINS        = %w(vagrant-vbguest)
+
+plugins_to_install = REQUIRED_PLUGINS.select { |plugin| not Vagrant.has_plugin? plugin }
+if not plugins_to_install.empty?
+  puts "Installing required plugins: #{plugins_to_install.join(' ')}"
+  if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+    exec "vagrant #{ARGV.join(' ')}"
+  else
+    abort "Installation of one or more plugins has failed. Aborting. Please read the Bike Index README."
+  end
+end
+
+local_dir = File.expand_path(File.dirname(__FILE__))
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "ubuntu/xenial32"
+
+  # Configure the virtual machine to use 1.5GB of RAM
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.cpus = 2
+    vb.name = 'de_bate'
+  end # end provider
+
+  # Forward the Rails server default port to the host
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 5432, host: 5432
+
+  # set up a synced folder for project files.
+  config.vm.synced_folder "site/", "/home/de_bate", :owner => 'ubuntu', :mount_options => [ "dmode=775", "fmode=774" ]
+
+  # run shell provisioner
+  config.vm.provision :shell, path: "dependencies.sh", keep_color: true
+  config.vm.provision :shell, path: "install-rvm.sh", args: "stable"
+  config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1"
+  config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1 rails haml"
+
+
+end # end configure block

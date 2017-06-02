@@ -71,7 +71,16 @@ $ sudo gem install bundler
 
 ### Starting the server
 
+Simply run
 
+```bash
+$ rails server
+```
+Open a browser on the host pointed to
+```bash
+http://localhost:3000
+```
+Should see a "now riding on rails" success page.
 
 ### Manual Installation
 
