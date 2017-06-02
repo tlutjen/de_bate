@@ -2,7 +2,7 @@
 
 source /usr/local/rvm/scripts/rvm || source /etc/profile.d/rvm.sh
 
-rvm use --default --install $1
+rvm use --default --install $1 #>/dev/null 2>&1
 
 shift
 
