@@ -53,9 +53,11 @@ With a SSH session open, run the following.
 ```bash
 # install rbenv via apt
 $ sudo apt-get install rbenv
+# install rbenv-build
+$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 # install ruby 2.4.1
 $ rbenv install 2.4.1
-# install ruby-build
+# install ruby headers, needed later on
 $ sudo apt-get install ruby-dev
 # install bundler
 $ sudo gem install bundler
