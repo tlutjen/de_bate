@@ -4,12 +4,12 @@ de_bate is a rails application that parses text from various sources and creates
 
 ## Contents
 - [Dev Environment](#Dev-Environment)
+  - [Prereqs](#prereqs)
   - [install VM using vagrant](#vagrant)
-    - [Included Packages](#Whats-in-the-box)
     - [SSH access](#ssh-access)
-    - [Installing Bundler](#installing-bundler)
-    - [Starting the server](#starting-the-server)
-  -
+    - [Installing packages](#installing-packages)
+    - [Starting the Server](#starting-the-server)
+  - [usage](#usage)
 
 ## Dev Environment
 
@@ -36,17 +36,6 @@ $ cd de_bate
 # run vagrant- this will take awhile!
 $ vagrant up
 ```
-Now you should have ruby 2.4.1 installed on the VM.
-
-### What's in the box???
-Included in the box.
-- [ubuntu 16.04 LTS 32bt]()
-- [rvm](https://rvm.io/)
-  - For managing ruby installs (only need 2.4.1 which is included by default.)
-- [ruby v2.4.1](https://www.ruby-lang.org/en/)
-- [rails v5.1.1](http://rubyonrails.org/)
-- [haml](http://haml.info/)
-  - For easy to use templates.
 
 ### SSH Access
 
@@ -63,58 +52,61 @@ $ ruby -v
 # should output ruby v 2.4.1
 ```
 
-### Installing Bundler
+### Installing Packages
+
+Vagrant only gets us a VM with file sharing setup between the host and the VM. You will still need to install Ruby on the VM.
+
 With a SSH session open, run the following.
 ```bash
+# install rbenv via apt
+$ sudo apt-get install rbenv
+# install ruby 2.4.1
+$ rbenv install 2.4.1
+# install ruby-build
+$ sudo apt-get install ruby-dev
+# install bundler
 $ sudo gem install bundler
 ```
 
 ### Starting the server
 
-
-
-### Manual Installation
-
-Instructions assume you are running Ubuntu 16.04 LTS and have git installed.
-
-- [Ruby](https://www.ruby-lang.org/en/downloads/)
-- [rbenv](https://github.com/rbenv/rbenv)
-
 ```bash
-# update your system
-$ sudo apt-get update && sudo apt-get upgrade
-# clone rbenv into a temp directory
-$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-# add to $PATH
-$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-# enable shims and autocompletion
-$ echo 'eval "$(rbenv init -)' >> ~/.bash_profile
-# install ruby-build
-$ git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-```
-
-At this point you are going to want to restart your terminal to let the PATH changes propagate.
-
-```bash
-# Install additional dependencies
-$ sudo apt-get install -y libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev nodejs
-# install ruby 2.4.1 using rbenv
-$ rbenv install 2.4.1
-# install ruby headers to prevent later errors
-$ sudo apt-get install ruby-dev
-# install bundler
-$ sudo gem install bundler
-# clone the project
-$ git clone https://github.com/tlutjen/de_bate.git
-# move into the directory
+# cd into project
 $ cd de_bate
-# run the initialization script
-$ ./prelang-init
-
+# bundle gems
+$ bundle install
+# setup the db
+$ rake db:migrate
+# start the rails server.
+$ rails server
 ```
 
-From here you will have to manually install rails and haml.
+Open your host browser to localhost:3000, you should see a success page.
 
-See:
-- [rails v5.1.1](http://rubyonrails.org/)
-- [haml](http://haml.info/)
+
+## Usage
+
+Say you want to turn the VM off...
+
+```bash
+$ vagrant halt
+```
+
+Say you want to run it again...
+
+```bash
+$ vagrant up
+```
+
+If you modify the Gemfile...
+
+```bash
+# run bundler again
+$ bundle install
+```
+
+If you modify the db migration files...
+
+```bash
+$ rake db:migrate
+```

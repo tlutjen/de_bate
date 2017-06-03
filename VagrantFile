@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 5432, host: 5432
 
   # set up a synced folder for project files.
-  config.vm.synced_folder "site/", "/home/de_bate", :owner => 'ubuntu', :mount_options => [ "dmode=775", "fmode=774" ]
+  config.vm.synced_folder "site/", "/home/ubuntu/de_bate", :owner => 'ubuntu', :mount_options => [ "dmode=775", "fmode=774" ]
 
   # run shell provisioner
   config.vm.provision :shell, path: "dependencies.sh", keep_color: true
