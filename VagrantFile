@@ -35,9 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # run shell provisioner
   config.vm.provision :shell, path: "dependencies.sh", keep_color: true
-  config.vm.provision :shell, path: "install-rvm.sh", args: "stable"
-  config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1"
-  config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1 rails haml"
+  # config.vm.provision :shell, path: "install-rvm.sh", args: "stable"
+  # config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1"
+  # config.vm.provision :shell, path: "install-ruby.sh", args: "2.4.1 rails haml"
 
 
 end # end configure block
