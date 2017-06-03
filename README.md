@@ -45,13 +45,6 @@ To SSH into the new box.
 $ vagrant ssh
 ```
 
-Try
-
-```bash
-$ ruby -v
-# should output ruby v 2.4.1
-```
-
 ### Installing Packages
 
 Vagrant only gets us a VM with file sharing setup between the host and the VM. You will still need to install Ruby on the VM.
@@ -71,7 +64,7 @@ $ sudo gem install bundler
 ### Starting the server
 
 ```bash
-# cd into project
+# cd into project shared folder
 $ cd de_bate
 # bundle gems
 $ bundle install
